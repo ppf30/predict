@@ -14,10 +14,6 @@ const PORT = process.env.PORT || 3002;
 
 app.use(express.json());
 
-// Servir la carpeta del modelo TFJS (model/model.json + pesos)
-const modelDir = path.resolve(__dirname, "model");
-app.use("/model", express.static(modelDir));
-
 
 // conectar a Mongo
 mongoose
@@ -28,12 +24,17 @@ mongoose
     process.exit(1);
   });
 
+// Servir la carpeta del modelo TFJS (model/model.json + pesos)
+const modelDir = path.resolve(__dirname, "model");
+app.use("/model", express.static(modelDir));
+
+
 app.use("/", predictRoutes);
 
 
 app.listen(PORT, async () => {
-  const serverUrl = "http://localhost:${PORT}";
-  console.log("PREDICT escuchando en ${serverUrl}");
+  const serverUrl = `http://localhost:${PORT}`;
+  console.log(`PREDICT escuchando en ${serverUrl}`);
 
   try {
     // Inicializa el modelo predictivo
