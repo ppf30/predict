@@ -10,19 +10,18 @@ const predictRoutes = require("./routes/predictRoutes");
 const { initModel } = require("./services/tfModelService");
 
 const PORT = process.env.PORT || 3002;
-
-
-app.use(express.json());
-
+const MONGO_URI = process.env.MONGO_URI;
 
 // conectar a Mongo
 mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("MongoDB conectado (PREDICT)"))
+  .connect(MONGO_URI)
+  .then(() => {console.log("MongoDB conectado (PREDICT)")})
   .catch((err) => {
     console.error("Error al conectar MongoDB:", err);
     process.exit(1);
   });
+
+app.use(express.json());
 
 // Servir la carpeta del modelo TFJS (model/model.json + pesos)
 const modelDir = path.resolve(__dirname, "model");

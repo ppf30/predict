@@ -20,4 +20,4 @@ const PredictionSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('Prediction', PredictionSchema);
+module.exports = mongoose.model("Prediction", PredictionSchema);
