@@ -34,10 +34,7 @@ function wasmFileDirUrl() {
   return pathToFileURL(distFsPath + path.sep).href;
 }
 
-/**
- * Inicializa backend WASM y carga el GraphModel
- * serverUrl: ej. http://localhost:3002
- */
+
 async function initModel(serverUrl) {
   const wasmPath = wasmFileDirUrl();
   wasmBackend.setWasmPaths(wasmPath);
@@ -66,7 +63,6 @@ async function initModel(serverUrl) {
     throw new Error("No se ha podido detectar inputName/outputName/inputDim");
   }
 
-  // Warm-up
   const Xwarm = tf.zeros([1, inputDim], "float32");
   let out;
   if (typeof model.executeAsync === "function") {
@@ -83,10 +79,7 @@ async function initModel(serverUrl) {
   console.log("[TF] Modelo listo.");
 }
 
-/**
- * Ejecuta el modelo con un vector de features
- * Devuelve un escalar >= 0
- */
+
 async function predict(features) {
   if (!ready || !model) {
     throw new Error("Model not ready");
