@@ -1,5 +1,5 @@
 # PREDICT
-
+Predict contiene un modelo preentrenado con ```TensorFlow```. Una vez confirma que el modelo está correctamente cargado y que los datos tienen el tamaño correcto (el que debe devolver acquire), se ejecuta obteniendo una predicción del consumo de energía. Este resultado se almacena en ```MongoDB```.
 
 ## Repositorios del proyecto
 ```bash 
